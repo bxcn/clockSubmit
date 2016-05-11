@@ -3,7 +3,7 @@ ClockSubmitV1.0
 这是一个防止重复提交Form表单的小插件;
 
 ```
-    <script src="ClockSubmit.js"></script>
+    <script src="clockSubmit.js"></script>
 ```
 调用方式：
 ```
