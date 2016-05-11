@@ -8,7 +8,7 @@ ClockSubmitV1.0
 调用方式：
 ```
 // 初始化ClockSubmit组件
-var c = ClockSubmit.init(false);
+var c = ClockSubmit.init();
 //多次点击添加按钮
 $("add").click(function(){
   // true：表示锁定当前表单不能提交
