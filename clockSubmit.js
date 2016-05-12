@@ -11,7 +11,7 @@
     this.grapTimer = 1000; // 锁定后，1秒钟后解锁
   }
   Clocked.prototype.init = function( grapTimer ) {
-    this._clockStatus = grapTimer || this.grapTimer;
+    this.grapTimer = grapTimer || this.grapTimer;
   }
 
   // 返回 true:锁是开着的，可以提交表单；false:销是关阗的，不可以提交表单；
