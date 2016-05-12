@@ -92,3 +92,32 @@
   }();
 
 })();
+
+/*
+第一版：
+var isSend = false;
+sureSendSMS = function() {
+  if ( isSend ) {
+    return;
+  }
+  isSend = true;
+  window.setTimeout(function(){
+    isSend = false;
+  },3000);
+}
+
+第二版：
+
+var clockSubmit = Clock.init();
+sureSendSMS = function() {
+  if ( clockSubmit.click()  ) {
+    return;
+  }
+}
+
+第三版：
+var timer = window.setInterval(function(){
+ clockSubmit()
+},50);
+
+*/
