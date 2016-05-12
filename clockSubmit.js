@@ -62,10 +62,12 @@
 
   // this is a Singleton Pattern
   window.Clock =  {
-    init: function() {
+    init: function( grapTimer ) {
       if ( !_clocked ) {
         _clocked = new Clocked();
       }
+      //初始化
+      _clocked.init( grapTimer );
       return _clocked;
     }
   }
