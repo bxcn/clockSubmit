@@ -8,7 +8,7 @@
   function Clocked() {
     this._clockStatus = true;//锁
     this.timer = null; // 定时器
-    this.grapTimer = 2000; // 锁定后，1秒钟后解锁
+    this.grapTimer = 1000; // 锁定后，1秒钟后解锁
   }
   Clocked.prototype.init = function( grapTimer ) {
     this._clockStatus = grapTimer || this.grapTimer;
