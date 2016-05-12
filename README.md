@@ -1,4 +1,4 @@
-clockSubmitV1.0
+clockSubmitV2.0
 =======================
 这是一个防止重复提交Form表单的小插件;
 
