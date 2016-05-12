@@ -69,16 +69,22 @@
       //初始化
       _clocked.init( grapTimer );
       return _clocked;
+    },
+    setTimer: function( grapTimer ) {
+      //初始化
+      _clocked.init( grapTimer );
     }
   }
 
 
   // 扩展
-  window.clockSubmit = function ( grapTimer ) {
+  window.clockSubmit = function () {
     // 单例模式共享一个实例对象
-    var c = Clock.init( grapTimer );
+    var c = Clock.init();
 
-    return function( callback, param ) {
+    return function( grapTimer ) {
+
+      Clock.setTimer( grapTimer );
 
       // false是没有锁定 true表示已经锁定不能提交了
       var isClock = c.clock();
