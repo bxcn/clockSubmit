@@ -116,8 +116,11 @@ sureSendSMS = function() {
 }
 
 第三版：
-var timer = window.setInterval(function(){
- clockSubmit()
-},50);
+$("add").click(function(){
+  if ( clockSubmit() ) {
+    // 在这里写提交的Ajax数据...
+    console.log("解锁");
+  };
+});
 
 */

@@ -9,7 +9,8 @@ clockSubmitV1.0
 ```
 //多次点击添加按钮
 $("add").click(function(){
-  clockSubmit(function(){
+  if ( clockSubmit() ) {
+    // 在这里写提交的Ajax数据...
     console.log("解锁");
-  });
+  };
 });
