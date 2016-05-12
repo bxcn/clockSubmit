@@ -1,30 +1,40 @@
+/*
+  Open Source
+  https://github.com/bxcn/clockSubmit
+*/
 ;var ClockSubmit = (function( ) {
 
   function Clock() {
-    this._isClock = false;
-    this._init = true; // 初始化clock锁
+    this._isOpen = true;//锁
     this.timer = null; // 定时器
   }
   Clock.prototype.init = function() {
-    this._isClock = false;
+    this._isOpen = false;
   }
 
-  Clock.prototype.clock = function() {
+  // 返回 true:锁是开着的，可以提交表单；false:销是关阗的，不可以提交表单；
+  Clock.prototype.isOpen = function() {
 
     var that = this;
-    // 是第一次请求吗？
-    if ( that._init ) {
-      that._init = false;
-      that._isClock = true;
+    /*
+      1、判断锁是开着的
+      2、把_isOpen开关给关闭false
+      3、添加定时器，定时器在1000毫秒内是_isOpen是关着的。1000毫秒后是再放开_isOpen
+    */
+    if ( that._isOpen ) {
+      that._isOpen = false;
       that.timer = window.setTimeout(function(){
         that.timer = null;
-        that._isClock = false;
+        that._isOpen = true;
       }, 1000);
 
-      return that._init; //如果返回是false 说明这是第一次
+      // 这里返回的true是说明这是第一次提交表单当然是可以提交的，所以会返回true.
+      // 连续点提交就不会再执行这里了，原因第一次进到这个语句块后，就改变了_isOpen的状态；
+      return true;
     }
 
-    return that._isClock;
+    // 在定时器未销毁之前，返回的都是false;
+    return that._isOpen;
   }
 
   return {
