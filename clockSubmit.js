@@ -63,7 +63,7 @@
 
 
   // 扩展
-  window.ClockSubmit = function () {
+  window.clockSubmit = function () {
     // 单例模式共享一个实例对象
     var c = Clock.init();
 

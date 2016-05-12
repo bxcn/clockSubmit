@@ -1,4 +1,4 @@
-ClockSubmitV1.0
+clockSubmitV1.0
 =======================
 这是一个防止重复提交Form表单的小插件;
 
@@ -9,7 +9,7 @@ ClockSubmitV1.0
 ```
 //多次点击添加按钮
 $("add").click(function(){
-  ClockSubmit(function(){
+  clockSubmit(function(){
     console.log("解锁");
   });
 });
