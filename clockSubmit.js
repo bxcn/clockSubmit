@@ -66,8 +66,6 @@
       if ( !_clocked ) {
         _clocked = new Clocked();
       }
-      //初始化
-      _clocked.init( grapTimer );
       return _clocked;
     },
     setTimer: function( grapTimer ) {
