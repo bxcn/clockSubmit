@@ -37,9 +37,18 @@
     return that._isOpen;
   }
 
+  var _clock = null;
+
+
+  // this is a Singleton Pattern
   return {
     init: function() {
-      return new Clock();
+
+      if ( _clock ) {
+        return _clock;
+      } else {
+        return new Clock();
+      }
     }
   };
 
