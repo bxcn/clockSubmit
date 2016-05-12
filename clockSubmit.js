@@ -8,9 +8,10 @@
   function Clocked() {
     this._clockStatus = true;//锁
     this.timer = null; // 定时器
+    this.grapTimer = 2000; // 锁定后，1秒钟后解锁
   }
-  Clocked.prototype.init = function() {
-    //this._clockStatus = true;
+  Clocked.prototype.init = function( grapTimer ) {
+    this._clockStatus = grapTimer || this.grapTimer;
   }
 
   // 返回 true:锁是开着的，可以提交表单；false:销是关阗的，不可以提交表单；
@@ -30,7 +31,7 @@
         that.timer = null;
         // 打开锁
         that.isOpen(true);
-      }, 3000);
+      }, that.grapTimer);
 
       // 这里返回的true是说明这是第一次提交表单当然是可以提交的，所以会返回true.
       // 连续点提交就不会再执行这里了，原因第一次进到这个语句块后，就改变了_clockStatus的状态；
@@ -71,9 +72,9 @@
 
 
   // 扩展
-  window.clockSubmit = function () {
+  window.clockSubmit = function ( grapTimer ) {
     // 单例模式共享一个实例对象
-    var c = Clock.init();
+    var c = Clock.init( grapTimer );
 
     return function( callback, param ) {
 
