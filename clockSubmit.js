@@ -118,9 +118,10 @@ sureSendSMS = function() {
 第三版：
 $("add").click(function(){
   if ( clockSubmit() ) {
-    // 在这里写提交的Ajax数据...
-    console.log("解锁");
+    return false;
   };
+  // 在这里写提交的Ajax数据...
+  console.log("解锁");
 });
 
 */
