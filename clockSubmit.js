@@ -2,18 +2,19 @@
   Open Source
   https://github.com/bxcn/clockSubmit
 */
-;var ClockSubmit = (function( ) {
-
-  function Clock() {
+;(function( ) {
+  window.console = console || {log: function() {}};
+  // 核心
+  function Clocked() {
     this._isOpen = true;//锁
     this.timer = null; // 定时器
   }
-  Clock.prototype.init = function() {
-    this._isOpen = false;
+  Clocked.prototype.init = function() {
+    //this._isOpen = true;
   }
 
   // 返回 true:锁是开着的，可以提交表单；false:销是关阗的，不可以提交表单；
-  Clock.prototype.isOpen = function() {
+  Clocked.prototype.clock = function() {
 
     var that = this;
     /*
@@ -37,19 +38,48 @@
     return that._isOpen;
   }
 
-  var _clock = null;
+  // 返回 true:锁是开着的，可以提交表单；false:销是关阗的，不可以提交表单；
+  Clocked.prototype.isOpen = function() {
 
+    return this._isOpen;
+  }
+
+  // 返回 true:锁是开着的，可以提交表单；false:销是关阗的，不可以提交表单；
+  Clocked.prototype.isClose = function() {
+    return !this._isOpen;
+  }
+
+  var _clocked = null;
 
   // this is a Singleton Pattern
-  return {
+  window.Clock =  {
     init: function() {
+      if ( !_clocked ) {
+        _clocked = new Clocked();
+      }
+      return _clocked;
+    }
+  }
 
-      if ( _clock ) {
-        return _clock;
+
+  // 扩展
+  window.ClockSubmit = function () {
+    // 单例模式共享一个实例对象
+    var c = Clock.init();
+
+    if ( c.isClose() ) {
+      return function() {};
+    }
+
+    return function( callback, param ) {
+
+      if ( c.clock() ) {
+        callback.call(this, param);
       } else {
-        return new Clock();
+        console.log("锁定")
       }
     }
-  };
+
+  }();
 
 })();
