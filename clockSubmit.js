@@ -141,7 +141,7 @@ $("add").click(function(){
 
   // 在这里写提交的Ajax数据...
   console.log("解锁");
-  // ajax执行完可以手动提交打开锁
+  // 可选方法 ajax执行完可以手动提交打开锁
   clockSubmit.isOpen(true);
 });
 
