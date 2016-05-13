@@ -10,7 +10,7 @@
     this.timer = null; // 定时器
     this.grapTimer = 1000; // 锁定后，1秒钟后解锁
   }
-  Clocked.prototype.init = function( grapTimer ) {
+  Clocked.prototype.setTimer = function( grapTimer ) {
     this.grapTimer = grapTimer || this.grapTimer;
   }
 
@@ -24,6 +24,7 @@
       3、添加定时器，定时器在1000毫秒内是_clockStatus是关着的。1000毫秒后是再放开_clockStatus
     */
     if ( that._clockStatus ) {
+
       // 锁住
       that.isClose(true);
 
@@ -61,42 +62,42 @@
   var _clocked = null;
 
   // this is a Singleton Pattern
-  window.Clock =  {
+  window.clockSubmit =  {
     init: function( grapTimer ) {
       if ( !_clocked ) {
         _clocked = new Clocked();
       }
-      return _clocked;
-    },
-    setTimer: function( grapTimer ) {
-      //初始化
-      _clocked.init( grapTimer );
-    }
-  }
 
-
-  // 扩展
-  window.clockSubmit = function () {
-    // 单例模式共享一个实例对象
-    var c = Clock.init();
-
-    return function( grapTimer ) {
-
-      Clock.setTimer( grapTimer );
+      _clocked.setTimer( grapTimer );
 
       // false是没有锁定 true表示已经锁定不能提交了
-      var isClock = c.clock();
-
-      if ( isClock ) {
-        console.log("锁定");
-      } else {
-        console.log("解锁")
-      }
+      var isClock = _clocked.clock();
 
       return isClock;
     }
+  }
 
-  }();
+/*
+  // 扩展
+  window.clockSubmit = function () {
+    // 单例模式共享一个实例对象
+    var c = c = Clock.init();
+    return {
+      init: function( grapTimer ) {
+        Clock.setTimer( grapTimer );
+        // false是没有锁定 true表示已经锁定不能提交了
+        var isClock = c.clock();
+        return isClock;
+      },
+      isOpen: function( b ) {
+        return c.isOpen(b);
+      },
+      isClose: function( b ) {
+        return c.isClose(b);
+      }
+
+    }
+  }();*/
 
 })();
 
@@ -130,5 +131,26 @@ $("add").click(function(){
   // 在这里写提交的Ajax数据...
   console.log("解锁");
 });
+
+第四版：
+$("add").click(function(){
+  // 表示锁定1000毫秒，填写默认也是1000毫秒
+  if ( clockSubmit.init(1000) ) {
+    return false;
+  };
+
+  // 在这里写提交的Ajax数据...
+  console.log("解锁");
+  // ajax执行完可以手动提交打开锁
+  clockSubmit.isOpen(true);
+});
+
+*/
+
+/*
+DEMO:
+  var timer = window.setInterval(function(){
+   console.log(clockSubmit.init(1000));
+  },50);
 
 */
