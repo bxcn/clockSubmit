@@ -15,6 +15,7 @@
   }
   Clocked.prototype.init = function(grapTimer) {
     this.setTimer( grapTimer );
+    return this.clock();
   }
   Clocked.prototype.setTimer = function(grapTimer) {
     this.grapTimer = grapTimer || this.grapTimer;
@@ -90,13 +91,13 @@
     if (!this._clocked) {
       this._clocked = new Clocked();
     }
-
-    this._clocked.init(grapTimer);
-
-    // false是没有锁定 true表示已经锁定不能提交了
-    var isClock = this._clocked.clock();
-
-    return isClock;
+    return this._clocked.init(grapTimer);
+  };
+  clockSubmitProxy.prototype.setTimer = function( grapTimer ) {
+    return this._clocked.setTimer( grapTimer );
+  };
+  clockSubmitProxy.prototype.clock = function() {
+    return this._clocked.clock();
   };
   clockSubmitProxy.prototype.isOpen = function(b) {
     return this._clocked.isOpen(b);
