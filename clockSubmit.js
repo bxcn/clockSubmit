@@ -20,7 +20,7 @@
   Clocked.prototype.setTimer = function(grapTimer) {
     this.grapTimer = grapTimer || this.grapTimer;
   }
-  // 返回 true:锁是开着的，可以提交表单；false:销是关阗的，不可以提交表单；
+  // 返回 true:锁是开着的，可以提交表单；false:锁是关着的，不可以提交表单；
   Clocked.prototype.clock = function() {
 
     var that = this;
