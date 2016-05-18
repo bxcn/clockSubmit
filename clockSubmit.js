@@ -20,7 +20,7 @@
   Clocked.prototype.setTimer = function(grapTimer) {
     this.grapTimer = grapTimer || this.grapTimer;
   }
-  // 返回 true:锁是开着的，可以提交表单；false:锁是关着的，不可以提交表单；
+  // 方法返回 false:锁是开着的，可以提交表单；true:锁是关着的，不可以提交表单；
   Clocked.prototype.clock = function() {
 
     var that = this;
@@ -40,12 +40,11 @@
         that.isOpen(true);
       }, that.grapTimer);
 
-      // 这里返回的true是说明这是第一次提交表单当然是可以提交的，所以会返回true.
       // 连续点提交就不会再执行这里了，原因第一次进到这个语句块后，就改变了_clockStatus的状态；
       return false;
     }
 
-    // 在定时器未销毁之前，返回的都是false;
+    // 在定时器未销毁之前，返回的都是true;
     return that.isClose();
   }
 
