@@ -27,4 +27,4 @@
     }
   }
 
-  window.clockSubmit = new Clock();
+  var clockSubmit = new Clock();

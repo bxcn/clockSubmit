@@ -39,7 +39,7 @@ Clock.prototype.clock = function () {
   }
 };
 
-window.clockSubmit = new Clock();
+var clockSubmit = new Clock();
 
   window.clockSubmit = clockSubmit;
   if (typeof define === 'function' && (define.amd || define.cmd)) { // AMD Module
