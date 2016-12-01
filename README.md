@@ -16,7 +16,6 @@ $("add").click(function(){
   };
 
   // 在这里写提交的Ajax数据...
-  console.log("解锁");
   // 可选的，ajax执行完可以手动打开锁，如果不手动打开，1000毫秒后会自动打开
   clockSubmit.open();
   
@@ -31,7 +30,6 @@ $("add").click(function(){
   // 
   if ( clockSubmit.init(1000) ) {
     // 在这里写提交的Ajax数据...
-    console.log("解锁");
     // 可选的，ajax执行完可以手动打开锁，如果不手动打开，1000毫秒后会自动打开
     clockSubmit.open();
   };
