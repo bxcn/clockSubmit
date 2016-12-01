@@ -38,6 +38,12 @@ Clock.prototype.clock = function () {
     return true;
   }
 };
+Clock.prototype.open = function () {
+
+  var that = this;
+  window.clearTimeout(that.timer);
+  that.timer = null;
+};
 
 var clockSubmit = new Clock();
 
