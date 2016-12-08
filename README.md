@@ -2,11 +2,11 @@ clockSubmit
 =======================
 这是一个防止重复提交Form表单的小插件;
 
-```
+```html
 <script src="clockSubmit.js"></script>
 ```
 调用方式1：
-```
+```javascript
 //多次点击添加按钮
 $("add").click(function(){
 
@@ -23,7 +23,7 @@ $("add").click(function(){
 
 ```
 调用方式2：
-```
+```javascript
 //多次点击添加按钮
 $("add").click(function(){
 
