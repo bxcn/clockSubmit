@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>clockSubmit-防止异步重复提交Form表单 AMD CMD NODE</title>
+  <title>clockSubmit-防止异步重复提交Form表单 Web</title>
   <script src="http://cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
   <script src="clockSubmit.js"></script>
 </head>
@@ -22,8 +22,8 @@
     font-size:20px;
   }
 </style>
-<div id="txt"></div>
 <body>
+<div id="txt"></div>
   <script>
   if (clockSubmit.init()) {
     $('#txt').html("第一次进来，clockSubmit.init()返回true并锁上")

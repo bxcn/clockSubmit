@@ -1,23 +1,22 @@
 ;
-(function(global, factory) {
+( function ( global, factory ) {
   'use strict';
-  if (typeof exports === 'object') {
+  if ( typeof define === 'function' && (define.amd || define.cmd) ) {
+    // AMD\CMD. Register as an anonymous module.
+    define( function ( require, exports, module ) {
+      return factory( global );
+    } );
+
+  } else if ( typeof exports === 'object' ) {
     module.exports = factory();
   } else {
-    factory(global);
+    global.
+    <%= namespace %> = factory( global );
   }
-}(typeof window !== "undefined" ? window : this, function(window) {
+}( typeof window !== "undefined" ? window : this, function ( window ) {
 
   <%= contents %>
 
-  window.<%= namespace %> = <%= exports %>;
-  if (typeof define === 'function' && (define.amd || define.cmd)) { // AMD Module
-    define(function(require) {
-      return <%= exports %>;
-    });
-
-  }
-
   return <%= exports %>;
 
-}));
+} ) );
