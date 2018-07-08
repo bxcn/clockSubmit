@@ -30,11 +30,14 @@
     base: "",
   });
   seajs.use("clockSubmit", function(clockSubmit) {
-    if (clockSubmit.init()) {
-      $('#txt').html("第一次进来，clockSubmit.init()返回true并锁上")
+
+    if (clockSubmit('clicbbos')) {
+      return;
     }
 
-    if (clockSubmit.init()) {
+    $('#txt').html("第一次进来，clockSubmit.init()返回true并锁上")
+
+    if (clockSubmit('3333')) {
       $('#txt').html("没有显示出来")
     }
   });

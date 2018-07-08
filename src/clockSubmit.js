@@ -1,38 +1,34 @@
-var clockSubmit = ( function () {
-  // 核心
-  function Clock() {
-    this.timer = null; // 定时器，表示锁是开着的
-    this.grapTimer = 1000;
-    // 锁定后，1秒钟后解锁
+const global = window || global || {};
+
+class _ClockSubmit {
+  constructor(sign, grapTimer) {
+    this.grapTimer = grapTimer || 1000;
+    this.sign = sign;
   }
-  Clock.prototype.init = function ( grapTimer ) {
-      this.grapTimer = grapTimer || this.grapTimer;
-      return this.clock();
-    }
-    // 方法返回 false:锁是开着的，可以提交表单；true:锁是关着的，不可以提交表单；
-  Clock.prototype.clock = function () {
 
-    var that = this;
-
-    // 判断定时器是否关闭,定时器不为null,表示锁没有打开
-    if ( that.timer != null ) {
-      return false;
-    } else {
-      // 添加定时器，定时器在1000毫秒内是status是关着的。1000毫秒后是再放开status
-      that.timer = window.setTimeout( function () {
-        //console.log(that.timer);
-        that.timer = null;
-      }, that.grapTimer );
-
+  clock() {
+    const sign = this.sign;
+    if (global[sign + 'timer']) {
+      // 第一次返回false
       return true;
     }
+    // 添加定时器，定时器在1000毫秒内是status是关着的。1000毫秒后是再放开status
+    global[sign + 'timer'] = window.setTimeout(() => {
+      this.open();
+    }, this.grapTimer);
+    return false;
   }
-  Clock.prototype.open = function () {
-
-    var that = this;
-    that.timer = null;
-    window.clearTimeout( that.timer );
+  open() {
+    const sign = this.sign;
+    global[sign] = null; // 释放引用
+    window.clearTimeout(global[sign + 'timer']);
+    global[sign + 'timer'] = null;
   }
+}
 
-  return new Clock();
-} )();
+var clockSubmit = function(sign, grapTimer) {
+  if (!global[sign]) {
+    global[sign] = new _ClockSubmit(sign, grapTimer);
+  }
+  return global[sign].clock();
+};
