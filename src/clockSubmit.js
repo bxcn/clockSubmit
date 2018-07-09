@@ -1,5 +1,7 @@
 const global = window || global || {};
-
+/**
+ * 锁住重复提交
+ */
 class _ClockSubmit {
   constructor(sign, grapTimer) {
     this.grapTimer = grapTimer || 1000;
@@ -7,6 +9,9 @@ class _ClockSubmit {
     this.signTimer = `${sign}timer`;
   }
 
+  /**
+   * 返回 true:锁住 false:没有锁住
+   */
   clock() {
     const sign = this.sign;
     const signTimer = this.signTimer;
@@ -20,6 +25,11 @@ class _ClockSubmit {
     }, this.grapTimer);
     return false;
   }
+
+  /**
+   * 打开锁
+   * @return {[type]} [description]
+   */
   open() {
     const sign = this.sign;
     const signTimer = this.signTimer;
@@ -28,9 +38,11 @@ class _ClockSubmit {
   }
 }
 
-var clockSubmit = function(sign, grapTimer) {
+const clockSubmit = function(sign, grapTimer) {
   if (!global[sign]) {
     global[sign] = new _ClockSubmit(sign, grapTimer);
   }
   return global[sign].clock();
 };
+
+module.exports.clockSubmit = window.clockSubmit = clockSubmit;
